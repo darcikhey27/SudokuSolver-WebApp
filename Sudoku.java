@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Sudoku {
 
@@ -7,13 +6,13 @@ public class Sudoku {
         int value;
         int y;
         int x;
-        List<Integer> candidates;
+        List<Integer> neighboors;
 
         public Cell(int value, int x, int y) {
             this.value = value;
             this.x = x;
             this.y = y;
-            this.candidates = new LinkedList<>();
+            this.neighboors = new LinkedList<>();
         }
         @Override
         public String toString() {
@@ -21,30 +20,57 @@ public class Sudoku {
         }
     }
 
-    public void solve(Cell[][] grid) {
+    public boolean solve(Cell[][] grid) {
         int i = 0;
         int j = 0;
         boolean foundVacant = false;
+        Map<Integer, Integer> candidates;
 
-        for(int x = 0; x < 4; x++) {
-            for(int y = 0; y < 4; y++) {
-                if(grid[x][y].value == 0) {
-                    i = x;
-                    j = y;
-                    foundVacant = true;
+        if(isFull(grid)) {
+            System.out.println("finished sudoku successfuly");
+            return true;
+        }
+        else {
+            for(int x = 0; x < 4; x++) {
+                for(int y = 0; y < 4; y++) {
+                    if(grid[x][y].value == 0) {
+                        i = x;
+                        j = y;
+                        foundVacant = true;
+                        break;
+                    }
+                }
+                if(foundVacant) {
                     break;
                 }
             }
-            if(foundVacant) {
-                break;
+            candidates = getCandidates(grid, i, j);
+
+            for(int x = 1; x < 4; x++) {
+                if(candidates.get(x) != null) {
+                    grid[i][j].value = candidates.get(x);
+
+                    solve(grid);
+                }
             }
+            // backtrack
+            grid[i][j].value = 0;
+            return false;
         }
-        List<Integer> candidates = getCandidates(grid, i, j);
-
-
     }
 
-    private List<Integer> getCandidates(Cell[][] grid, int i, int j) {
+    private boolean isFull(Cell[][] grid) {
+        for(int x = 0; x < 4; x++) {
+            for(int y = 0; y < 4; y++) {
+                if(grid[x][y].value == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Map<Integer, Integer> getCandidates(Cell[][] grid, int i, int j) {
 
         List<Integer> rowValues = new LinkedList<>();
         for(int y = 0; y < 4; y++) {
@@ -63,21 +89,21 @@ public class Sudoku {
 
         int k = 0;
         int l = 0;
-        if(i >= 0 && i <= 2) {
+        if(i >= 0 && i <= 1) {
             k = 0;
         }
-        else if(i >= 3 && i <=5) {
-            k = 3;
+        else if(i >= 2 && i <=5) {
+            k = 2;
         }
         else {
             k = 6;
         }
 
-        if(l >= 0 && l <= 2) {
+        if(j >= 0 && j <= 1) {
             l = 0;
         }
-        else if(l >= 3 && l <=5) {
-            l = 3;
+        else if(j >= 2 && j <=5) {
+            l = 1;
         }
         else {
             l = 6;
@@ -85,19 +111,43 @@ public class Sudoku {
         }
 
         // work on the mini grid section
+        List<Integer> squareValues = new LinkedList<>();
+        for(int x = k; x <= 1; x++) {
+            for(int y = l; y <=1; y++) {
+                if(grid[x][y].value != 0) {
+                    squareValues.add(grid[x][y].value);
+                }
+            }
+        }
 
-        return rowValues;
+        squareValues.addAll(rowValues);
+        Map<Integer, Integer> candidates = new Hashtable<Integer, Integer>();
+        addToFinalList(candidates, squareValues);
+
+        return candidates;
+    }
+    private void addToFinalList(Map<Integer, Integer> map, List<Integer> list) {
+        int place = 1;
+        for(int i = 1; i < 4; i++) {
+            if(!list.contains(i)) {
+                map.put(place, i);
+                place++;
+            }
+        }
     }
 
     public static void main(String[] args) {
         Cell[][] board = new Cell[4][4];
         board[0][0] = new Cell(0,0,0);
         board[0][1] = new Cell(4,0,1);
+        board[1][0] = new Cell(1,1,0);
+        board[1][1] = new Cell(0,1,1);
+
         board[0][2] = new Cell(1,0,2);
         board[0][3] = new Cell(0,0,3);
 
-        board[1][0] = new Cell(1,1,0);
-        board[1][1] = new Cell(0,1,1);
+
+
         board[1][2] = new Cell(0,1,2);
         board[1][3] = new Cell(0,1,3);
 
