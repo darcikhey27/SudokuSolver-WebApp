@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Sudoku {
@@ -14,9 +16,10 @@ public class Sudoku {
             this.y = y;
             this.neighboors = new LinkedList<>();
         }
+
         @Override
         public String toString() {
-            return this.value+" ("+this.x+","+this.y+")";
+            return this.value + " (" + this.x + "," + this.y + ")";
         }
     }
 
@@ -24,6 +27,7 @@ public class Sudoku {
         int i = 0;
         int j = 0;
         boolean foundVacant = false;
+        boolean wasSolved = false;
         Map<Integer, Integer> candidates;
 
         if(isFull(grid)) {
@@ -31,8 +35,8 @@ public class Sudoku {
             return true;
         }
         else {
-            for(int x = 0; x < 4; x++) {
-                for(int y = 0; y < 4; y++) {
+            for(int x = 0; x < 9; x++) {
+                for(int y = 0; y < 9; y++) {
                     if(grid[x][y].value == 0) {
                         i = x;
                         j = y;
@@ -46,22 +50,27 @@ public class Sudoku {
             }
             candidates = getCandidates(grid, i, j);
 
-            for(int x = 1; x < 4; x++) {
+            for(int x = 1; x < 10; x++) {
                 if(candidates.get(x) != null) {
                     grid[i][j].value = candidates.get(x);
 
-                    solve(grid);
+                    wasSolved = solve(grid);
+                    if(wasSolved) {
+                        break;
+                    }
                 }
             }
             // backtrack
-            grid[i][j].value = 0;
-            return false;
+            if(!wasSolved) {
+                grid[i][j].value = 0;
+            }
         }
+        return wasSolved;
     }
 
     private boolean isFull(Cell[][] grid) {
-        for(int x = 0; x < 4; x++) {
-            for(int y = 0; y < 4; y++) {
+        for(int x = 0; x < 9; x++) {
+            for(int y = 0; y < 9; y++) {
                 if(grid[x][y].value == 0) {
                     return false;
                 }
@@ -73,13 +82,13 @@ public class Sudoku {
     private Map<Integer, Integer> getCandidates(Cell[][] grid, int i, int j) {
 
         List<Integer> rowValues = new LinkedList<>();
-        for(int y = 0; y < 4; y++) {
+        for(int y = 0; y < 9; y++) {
             if(grid[i][y].value != 0) {
                 rowValues.add(grid[i][y].value);
             }
         }
         List<Integer> colValues = new LinkedList<>();
-        for(int x = 0; x < 4; x++) {
+        for(int x = 0; x < 9; x++) {
             if(grid[x][j].value != 0) {
                 colValues.add(grid[x][j].value);
             }
@@ -89,31 +98,30 @@ public class Sudoku {
 
         int k = 0;
         int l = 0;
-        if(i >= 0 && i <= 1) {
+        if(i >= 0 && i <= 2) {
             k = 0;
         }
-        else if(i >= 2 && i <=5) {
-            k = 2;
+        else if(i >= 3 && i <= 5) {
+            k = 3;
         }
         else {
             k = 6;
         }
 
-        if(j >= 0 && j <= 1) {
+        if(j >= 0 && j <= 2) {
             l = 0;
         }
-        else if(j >= 2 && j <=5) {
-            l = 1;
+        else if(j >= 3 && j <= 5) {
+            l = 3;
         }
         else {
             l = 6;
-            System.out.println("i");
         }
 
         // work on the mini grid section
         List<Integer> squareValues = new LinkedList<>();
-        for(int x = k; x <= 1; x++) {
-            for(int y = l; y <=1; y++) {
+        for(int x = k; x < k + 3; x++) {
+            for(int y = l; y < l + 3; y++) {
                 if(grid[x][y].value != 0) {
                     squareValues.add(grid[x][y].value);
                 }
@@ -126,9 +134,10 @@ public class Sudoku {
 
         return candidates;
     }
+
     private void addToFinalList(Map<Integer, Integer> map, List<Integer> list) {
         int place = 1;
-        for(int i = 1; i < 4; i++) {
+        for(int i = 1; i < 10; i++) {
             if(!list.contains(i)) {
                 map.put(place, i);
                 place++;
@@ -137,34 +146,35 @@ public class Sudoku {
     }
 
     public static void main(String[] args) {
-        Cell[][] board = new Cell[4][4];
-        board[0][0] = new Cell(0,0,0);
-        board[0][1] = new Cell(4,0,1);
-        board[1][0] = new Cell(1,1,0);
-        board[1][1] = new Cell(0,1,1);
 
-        board[0][2] = new Cell(1,0,2);
-        board[0][3] = new Cell(0,0,3);
+        Scanner fin = null;
+        try {
+            fin = new Scanner(new File("sudoku.txt"));
 
-
-
-        board[1][2] = new Cell(0,1,2);
-        board[1][3] = new Cell(0,1,3);
-
-        board[2][0] = new Cell(0,2,0);
-        board[2][1] = new Cell(0,2,1);
-        board[2][2] = new Cell(0,2,2);
-        board[2][3] = new Cell(2,2,3);
-
-        board[3][0] = new Cell(0,3,0);
-        board[3][1] = new Cell(2,3,1);
-        board[3][2] = new Cell(3,3,2);
-        board[3][3] = new Cell(0,3,3);
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Cell[][] grid = new Cell[9][9];
+        for(int i = 0; i < 9; i++) {
+            for(int k = 0; k < 9; k++) {
+                grid[i][k] = new Cell(fin.nextInt(), i, k);
+            }
+        }
 
         Sudoku sudoku = new Sudoku();
-        sudoku.solve(board);
+        boolean wasSolved = sudoku.solve(grid);
+        System.out.println(wasSolved ? "Success" : "Fail");
+        print(grid);
 
 
+    }
 
+    private static void print(Cell[][] grid) {
+        for(int i = 0; i < 9; i++) {
+            for(int k = 0; k < 9; k++) {
+                System.out.print(grid[i][k].value);
+            }
+            System.out.println();
+        }
     }
 }
