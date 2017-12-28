@@ -1,3 +1,5 @@
+package com.darcikhey.sudoku;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;

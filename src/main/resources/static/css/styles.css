@@ -1,0 +1,68 @@
+body {
+    padding-top: 20px;
+    background-color: #eeeeee;
+}
+nav>h1>a {
+    color: #000000;
+    text-decoration: none;
+}
+nav>h1>a:hover {
+    color: tomato;
+}
+.widget {
+    width: 200px;
+    height: 250px;
+    background-color: #979797;
+    text-align: center;
+    border-radius: 10px;
+}
+.widget #city-name {
+    color: #eeeeee;
+}
+
+.widget #temp {
+    color: #AD5F67;
+}
+.widget #description {
+    color: #eeeeee;
+}
+
+.col-md-10 {
+    text-align: left;
+}
+
+/* sidenav styles *************/
+
+li {
+    background-color: #979797;
+    border-radius: 5px;
+}
+li a {
+    color: black;
+    font-family: Courier New, Courier, monospace;
+    font-size: 2.5em;
+    text-align: center;
+}
+.nav>li>a:hover {
+    background-color: #666666;
+}
+.results>p {
+    color: black;
+    font-family: Courier New, Courier, monospace;
+    font-size: .8em;
+}
+#output-all {
+    color: black;
+    font-family: Courier New, Courier, monospace;
+    font-size: .8em;
+}
+#btn-primary {
+    background-color: #000000;
+}
+/*.table {*/
+    /*color: #373737*/
+/*}*/
+
+/*#my-table>td {*/
+    /*background-color: #373737;*/
+/*}*/

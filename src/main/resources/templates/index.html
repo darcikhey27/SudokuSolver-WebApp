@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--head will be inserted here-->
+<head th:include="/fragments/header :: header"></head>
+
+<body>
+
+
+<!--navbar will be inserted here-->
+<div class="container-fluid" th:include="fragments/nav :: nav"></div>
+
+<!--sidenav will be inserted here-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" th:include="fragments/nav :: sidenav"></div>
+
+        <div class="col-md-10">
+            <h2>Home Page</h2>
+            <p>click on an HTTP method on the left to start testing the API</p>
+            <br>
+            <h3>Click button to show all json objects</h3>
+            <button class="btn btn-default" th:id="show-all">Show all cities</button>
+            <p style="color: dodgerblue;" id="output-all"></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table" id="my-table">
+        <tr>
+            <td id="td-append"></td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="container" th:include="fragments/footer-frag :: footer"></div>
+</body>
+
+</html>
