@@ -12,16 +12,28 @@ function init() {
     $("#solve").on("click", solve);
 }
 function solve() {
-    alert("solving the puszzle");
+    console.log("solving the puszzle");
+    // build a JSON string
     var jsonValues = {};
     for(var x = 0; x < 9; x++) {
+        jsonValues[x] = [];
         for(var y = 0; y < 9; y++) {
-            //var item = values[x][y];
-            var item = $("#cell"+x+"-"+y).val(value);
-           // $("#cell"+x+"-"+y).val(value);
-            //TODO: fill the json array with data14
+            var item = $("#cell"+x+"-"+y).val();
+            jsonValues[x][y] = item;
         }
     }
+    // pass the json string to the controller
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8090/add-city',
+        data: JSON.stringify(jsonValues),
+        success: function (data) {
+            console.log(data);
+            //language=JQuery-CSS
+            $("#output").html(JSON.stringify(data));
+        }
+    });
+
 
 }
 function addValues() {
