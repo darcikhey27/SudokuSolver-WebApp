@@ -25,7 +25,7 @@ function solve() {
     // pass the json string to the controller
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8090/add-city',
+        url: 'http://localhost:8080/solve',
         data: JSON.stringify(jsonValues),
         success: function (data) {
             console.log(data);
@@ -33,8 +33,6 @@ function solve() {
             $("#output").html(JSON.stringify(data));
         }
     });
-
-
 }
 function addValues() {
 

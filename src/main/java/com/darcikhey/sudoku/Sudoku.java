@@ -1,9 +1,19 @@
 package com.darcikhey.sudoku;
 
+
+
+
+import org.springframework.stereotype.Repository;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.util.*;
 
+@Repository
 public class Sudoku {
 
     private static class Cell {
@@ -23,6 +33,16 @@ public class Sudoku {
         public String toString() {
             return this.value + " (" + this.x + "," + this.y + ")";
         }
+    }
+
+    private Cell[][] grid;
+
+    public Sudoku() {
+        this.grid = new Cell[9][9];
+    }
+    public String buildFromJsonString(String jsonString) {
+        System.out.println("from repository "+jsonString);
+        return "{status : \"ok from repo\"}";
     }
 
     public boolean solve(Cell[][] grid) {
