@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by DARCI on 12/27/2017.
+ * Mind wide open
  */
 @Controller
 public class SudokuController {

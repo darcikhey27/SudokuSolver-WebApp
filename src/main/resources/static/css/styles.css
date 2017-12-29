@@ -1,68 +1,36 @@
-body {
-    padding-top: 20px;
-    background-color: #eeeeee;
+table {
+    margin:1em auto;
 }
-nav>h1>a {
-    color: #000000;
-    text-decoration: none;
+td {
+    max-width: 5px;
+    border:1px solid;
+    text-align:center;
 }
-nav>h1>a:hover {
-    color: tomato;
+td:first-child {
+    border-left:solid;
 }
-.widget {
-    width: 200px;
-    height: 250px;
-    background-color: #979797;
+td:nth-child(3n) {
+    border-right:solid ;
+}
+tr:first-child {
+    border-top:solid;
+}
+tr:nth-child(3n) td {
+    border-bottom:solid ;
+}
+input {
+    max-width: 32px;
     text-align: center;
-    border-radius: 10px;
-}
-.widget #city-name {
-    color: #eeeeee;
+    font-family: Consolas, serif;
 }
 
-.widget #temp {
-    color: #AD5F67;
-}
-.widget #description {
-    color: #eeeeee;
-}
+#grid {
+    margin: auto;
+    width: 300px;
+    height:500px;
 
-.col-md-10 {
-    text-align: left;
 }
-
-/* sidenav styles *************/
-
-li {
-    background-color: #979797;
-    border-radius: 5px;
+.buttons {
+    margin: auto;
+    width: 25%;
 }
-li a {
-    color: black;
-    font-family: Courier New, Courier, monospace;
-    font-size: 2.5em;
-    text-align: center;
-}
-.nav>li>a:hover {
-    background-color: #666666;
-}
-.results>p {
-    color: black;
-    font-family: Courier New, Courier, monospace;
-    font-size: .8em;
-}
-#output-all {
-    color: black;
-    font-family: Courier New, Courier, monospace;
-    font-size: .8em;
-}
-#btn-primary {
-    background-color: #000000;
-}
-/*.table {*/
-    /*color: #373737*/
-/*}*/
-
-/*#my-table>td {*/
-    /*background-color: #373737;*/
-/*}*/

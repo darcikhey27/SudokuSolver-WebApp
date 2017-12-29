@@ -6,11 +6,23 @@ function init() {
         contentType:"application/json; charset=utf-8",
         dataType:"json"
     });
-    $("#POST").on("click", add);
-    $("#GET").on("click", get);
-    $("#UPDATE").on("click", update);
-    $("#DELETE").on("click", deletee);
-    $("#show-all").on("click", showAll);
+    $("#generate-board").on("click", generateBoard);
+    $("#clear-board").on("click", clearBoard);
+}
+function clearBoard() {
+    alert("clearing board");
+}
+
+function generateBoard() {
+    // disable button so they don't keep on making grids
+    $("#generate-board").attr("disabled", "disabled");
+
+    for(var i = 0; i < 9; i++) {
+        $(".table").append("<tr></tr>");
+        for(var k = 0; k < 9; k++) {
+            $(".table tr:last").append("<td class='mycell'>"+ "<input type='text' value='7' size='3'/></td>")
+        }
+    }
 
 
 }
