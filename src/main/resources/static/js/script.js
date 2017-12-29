@@ -1,27 +1,50 @@
 $(document).ready(init);
 
 function init() {
+    generateBoard();
     $.ajaxSetup({
         cache: false,
         contentType:"application/json; charset=utf-8",
         dataType:"json"
     });
-    $("#generate-board").on("click", generateBoard);
+    // $("#generate-board").on("click", generateBoard);
     $("#clear-board").on("click", clearBoard);
     $("#solve").on("click", solve);
 }
 function solve() {
     alert("solving the puszzle");
+    var jsonValues = {};
+    for(var x = 0; x < 9; x++) {
+        for(var y = 0; y < 9; y++) {
+            //var item = values[x][y];
+            var item = $("#cell"+x+"-"+y).val(value);
+           // $("#cell"+x+"-"+y).val(value);
+            //TODO: fill the json array with data14
+        }
+    }
 
+}
+function addValues() {
 
-
-    //TODO: build JSON here and send to backend
-
-
-
-
-
-
+    console.log("adding values to cells");
+    var values = {
+        0 : [3,0,6,5,0,8,4,0,0],
+        1 : [5,2,0,0,0,0,0,0,0],
+        2 : [0,8,7,0,0,0,0,3,1],
+        3 : [0,0,3,0,1,0,0,8,0],
+        4 : [9,0,0,8,6,3,0,0,5],
+        5 : [0,5,0,0,9,0,6,0,0],
+        6 : [1,3,0,0,0,0,2,5,0],
+        7 : [0,0,0,0,0,0,0,7,4],
+        8 : [0,0,5,2,0,6,3,0,0]
+    };
+    //console.log(values[0][0]);
+    for(var x = 0; x < 9; x++) {
+        for(var y = 0; y < 9; y++) {
+            var value = values[x][y];
+            $("#cell"+x+"-"+y).val(value);
+        }
+    }
 }
 function clearBoard() {
     $("input").val("");
@@ -32,18 +55,19 @@ function generateBoard() {
     // disable button so they don't keep on making grids
     $("#generate-board").attr("disabled", "disabled");
 
+    // Generate board
     for(var i = 0; i < 9; i++) {
         $(".table").append("<tr></tr>");
         $(".table tr:last").attr("id", "tr"+i);
         for(var k = 0; k < 9; k++) {
-            $(".table tr:last").append("<td>"+ "<input type='text' value='7' size='3'/></td>");
+            $(".table tr:last").append("<td>"+ "<input type='text' size='3'/></td>");
             $(".table td:last").attr("id", "td"+k);
             $(".table input:last").attr("id", "cell"+i+"-"+k);
         }
     }
-
-
+    addValues();
 }
+
 function showAll() {
     $.ajax({
         type: 'GET',

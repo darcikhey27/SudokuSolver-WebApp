@@ -44,3 +44,11 @@ button {
     font-family: inherit;
     font-size: 2.0em;
 }
+xmp {
+    font-family: Consolas, sans-serif;
+    font-size: 1.2em;
+    color: darkgreen;
+}
+.col-md-6 {
+    text-align: center;
+}
