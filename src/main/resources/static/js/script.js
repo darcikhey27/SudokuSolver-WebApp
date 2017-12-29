@@ -10,7 +10,8 @@ function init() {
     $("#clear-board").on("click", clearBoard);
 }
 function clearBoard() {
-    alert("clearing board");
+    $("input").val("");
+    $("#generate-board").removeAttr("disabled");
 }
 
 function generateBoard() {
@@ -19,8 +20,11 @@ function generateBoard() {
 
     for(var i = 0; i < 9; i++) {
         $(".table").append("<tr></tr>");
+        $(".table tr:last").attr("id", "tr"+i);
         for(var k = 0; k < 9; k++) {
-            $(".table tr:last").append("<td class='mycell'>"+ "<input type='text' value='7' size='3'/></td>")
+            $(".table tr:last").append("<td>"+ "<input type='text' value='7' size='3'/></td>");
+            $(".table td:last").attr("id", "td"+k);
+            $(".table input:last").attr("id", "cell"+i+"-"+k);
         }
     }
 

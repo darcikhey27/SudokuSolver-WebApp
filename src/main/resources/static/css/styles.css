@@ -30,7 +30,17 @@ input {
     height:500px;
 
 }
+button {
+
+}
 .buttons {
     margin: auto;
     width: 25%;
+}
+#navbar {
+    background-color: lavender;
+}
+#navbar h1{
+    font-family: inherit;
+    font-size: 2.0em;
 }
