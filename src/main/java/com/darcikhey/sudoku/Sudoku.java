@@ -3,6 +3,7 @@ package com.darcikhey.sudoku;
 
 
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.json.Json;
@@ -13,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.*;
 
-@Repository
+@Component
 public class Sudoku {
 
     private static class Cell {
@@ -42,7 +43,25 @@ public class Sudoku {
     }
     public String buildFromJsonString(String jsonString) {
         System.out.println("from repository "+jsonString);
+
+        buildGrid(jsonString);
         return "{status : \"ok from repo\"}";
+    }
+
+    private void buildGrid(String string) {
+        //Cell[][] grid = new Cell[9][9];
+        JsonObject jsonObject = getJsonObj(string);
+
+        
+        for(int i = 0; i < 9; i++) {
+            for(int k = 0; k < 9; k++) {
+                grid[i][k] = new Cell(fin.nextInt(), i, k);
+            }
+        }
+    }
+    private JsonObject getJsonObj(String s) {
+        JsonReader jsonReader = Json.createReader(new StringReader(s));
+        return jsonReader.readObject();
     }
 
     public boolean solve(Cell[][] grid) {

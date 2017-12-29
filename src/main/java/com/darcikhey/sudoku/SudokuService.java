@@ -12,6 +12,7 @@ import javax.json.JsonObject;
 @Service
 public class SudokuService {
 
+
     private final Sudoku sudoku;
 
     @Autowired
