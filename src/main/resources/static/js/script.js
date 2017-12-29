@@ -8,10 +8,24 @@ function init() {
     });
     $("#generate-board").on("click", generateBoard);
     $("#clear-board").on("click", clearBoard);
+    $("#solve").on("click", solve);
+}
+function solve() {
+    alert("solving the puszzle");
+
+
+
+    //TODO: build JSON here and send to backend
+
+
+
+
+
+
 }
 function clearBoard() {
     $("input").val("");
-    $("#generate-board").removeAttr("disabled");
+    $('#generate-board').removeAttr("disabled");
 }
 
 function generateBoard() {
