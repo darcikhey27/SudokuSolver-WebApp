@@ -21,7 +21,6 @@ public class SudokuService {
     }
 
     public String buildFromJson(String jsonString) {
-        //System.out.println("from service "+ jsonString);
         return this.sudoku.buildFromJsonString(jsonString);
     }
 }

@@ -1,12 +1,9 @@
 package com.darcikhey.sudoku;
 
-
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import javax.json.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.StringReader;
 import java.util.*;
 
@@ -17,13 +14,11 @@ public class Sudoku {
         int value;
         int y;
         int x;
-        List<Integer> neighboors;
 
         public Cell(int value, int x, int y) {
             this.value = value;
             this.x = x;
             this.y = y;
-            this.neighboors = new LinkedList<>();
         }
 
         @Override
@@ -37,6 +32,7 @@ public class Sudoku {
     public Sudoku() {
         this.grid = new Cell[9][9];
     }
+
     private void print() {
         for(int i = 0; i < 9; i++) {
             for(int k = 0; k < 9; k++) {
@@ -49,50 +45,44 @@ public class Sudoku {
     @Override
     public String toString() {
         JsonObjectBuilder json = Json.createObjectBuilder();
-
-        //StringBuilder res = new StringBuilder();
-
+        // build the JSON object
         for(int i = 0; i < 9; i++) {
+            // create an array that will be in the final json object
             JsonArrayBuilder itemArray = Json.createArrayBuilder();
             for(int k = 0; k < 9; k++) {
+                // add the cell x,y value to the array
                 itemArray.add(this.grid[i][k].value);
             }
-            json.add(""+i, itemArray);
+            // add the array to the index of i
+            json.add("" + i, itemArray);
         }
 
         return json.build().toString();
     }
+
+    /* will take in a json string passed form the frontend
+       will pass it to the helper method to build the grid, then solve it
+     */
     public String buildFromJsonString(String jsonString) {
-        //System.out.println("from repository " + jsonString);
-
         String result = buildGrid(jsonString);
-
         return result;
     }
 
     private String buildGrid(String string) {
-        //Cell[][] grid = new Cell[9][9];
-        //JsonObject jsonObject = getJsonObj(string);
-
-        //String json = "{\"0\":[\"3\",\"0\",\"6\",\"5\",\"0\",\"8\",\"4\",\"0\",\"0\"],\"1\":[\"5\",\"2\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"],\"2\":[\"0\",\"8\",\"7\",\"0\",\"0\",\"0\",\"0\",\"3\",\"1\"],\"3\":[\"0\",\"0\",\"3\",\"0\",\"1\",\"0\",\"0\",\"8\",\"0\"],\"4\":[\"9\",\"0\",\"0\",\"8\",\"6\",\"3\",\"0\",\"0\",\"5\"],\"5\":[\"0\",\"5\",\"0\",\"0\",\"9\",\"0\",\"6\",\"0\",\"0\"],\"6\":[\"1\",\"3\",\"0\",\"0\",\"0\",\"0\",\"2\",\"5\",\"0\"],\"7\":[\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"7\",\"4\"],\"8\":[\"0\",\"0\",\"5\",\"2\",\"0\",\"6\",\"3\",\"0\",\"0\"]}";
         JsonObject jsonObject = getJsonObj(string);
-       // System.out.println("from buildGrid");
-        //System.out.println(jsonObject.toString());
 
-        // build the grid from the json object
+        // build the grid board from the json object
         for(int i = 0; i < 9; i++) {
             JsonArray array = jsonObject.getJsonArray("" + i);
             for(int k = 0; k < 9; k++) {
                 String s = array.getString(k);
-
                 int value = Integer.parseInt(s);
                 this.grid[i][k] = new Cell(value, i, k);
-                //System.out.println(jsonObject.getS);
-                //System.out.print(array.getJsonString(k));
             }
-            System.out.println();
         }
+        // solve the grid puzzle here
         boolean wasSolved = this.solve(this.grid);
+        // if not solved return bad status
         if(!wasSolved) {
             return "{status: \"fail\"}";
         }
@@ -100,11 +90,13 @@ public class Sudoku {
         return this.toString();
     }
 
+    // helper to build a JSON object from a string
     private JsonObject getJsonObj(String s) {
         JsonReader jsonReader = Json.createReader(new StringReader(s));
         return jsonReader.readObject();
     }
 
+    // main algorithm to solve the puzzle
     public boolean solve(Cell[][] grid) {
         int i = 0;
         int j = 0;

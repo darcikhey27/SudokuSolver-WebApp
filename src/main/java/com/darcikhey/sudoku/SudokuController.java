@@ -32,8 +32,6 @@ public class SudokuController {
     @RequestMapping(value = "/solve", method = RequestMethod.POST)
     @ResponseBody
     public String solve(@RequestBody String jsonString) {
-       // System.out.println(jsonString);
-
         return this.sudokuService.buildFromJson(jsonString);
     }
 
