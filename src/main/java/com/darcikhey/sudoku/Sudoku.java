@@ -54,9 +54,10 @@ public class Sudoku {
         return json.toString();
     }
     public String buildFromJsonString(String jsonString) {
-        System.out.println("from repository " + jsonString);
+        //System.out.println("from repository " + jsonString);
 
         String result = buildGrid(jsonString);
+
         return "{status : \"ok from repo\"}";
     }
 
@@ -66,23 +67,24 @@ public class Sudoku {
 
         //String json = "{\"0\":[\"3\",\"0\",\"6\",\"5\",\"0\",\"8\",\"4\",\"0\",\"0\"],\"1\":[\"5\",\"2\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"],\"2\":[\"0\",\"8\",\"7\",\"0\",\"0\",\"0\",\"0\",\"3\",\"1\"],\"3\":[\"0\",\"0\",\"3\",\"0\",\"1\",\"0\",\"0\",\"8\",\"0\"],\"4\":[\"9\",\"0\",\"0\",\"8\",\"6\",\"3\",\"0\",\"0\",\"5\"],\"5\":[\"0\",\"5\",\"0\",\"0\",\"9\",\"0\",\"6\",\"0\",\"0\"],\"6\":[\"1\",\"3\",\"0\",\"0\",\"0\",\"0\",\"2\",\"5\",\"0\"],\"7\":[\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"7\",\"4\"],\"8\":[\"0\",\"0\",\"5\",\"2\",\"0\",\"6\",\"3\",\"0\",\"0\"]}";
         JsonObject jsonObject = getJsonObj(string);
+        System.out.println("from buildGrid");
+        System.out.println(jsonObject.toString());
 
-
-        // build the grid from the json object
-        for(int i = 0; i < 9; i++) {
-            JsonArray array = jsonObject.getJsonArray("" + i);
-            for(int k = 0; k < 9; k++) {
-                int value = Integer.parseInt(String.valueOf(array.getJsonString(k)));
-                this.grid[i][k] = new Cell(value, i, k);
-                //System.out.println(jsonObject.getS);
-                //System.out.print(array.getJsonString(k));
-            }
-            // System.out.println();
-        }
-        boolean wasSolved = this.solve(this.grid);
-        if(!wasSolved) {
-            return "{status: \"fail\"}";
-        }
+//        // build the grid from the json object
+//        for(int i = 0; i < 9; i++) {
+//            JsonArray array = jsonObject.getJsonArray("" + i);
+//            for(int k = 0; k < 9; k++) {
+//                int value = Integer.parseInt(String.valueOf(array.getJsonString(k)));
+//                this.grid[i][k] = new Cell(value, i, k);
+//                //System.out.println(jsonObject.getS);
+//                //System.out.print(array.getJsonString(k));
+//            }
+//            // System.out.println();
+//        }
+//        boolean wasSolved = this.solve(this.grid);
+//        if(!wasSolved) {
+//            return "{status: \"fail\"}";
+//        }
         return this.grid.toString();
     }
 

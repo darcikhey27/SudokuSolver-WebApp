@@ -28,6 +28,7 @@ function solve() {
         url: 'http://localhost:8080/solve',
         data: JSON.stringify(jsonValues),
         success: function (data) {
+            console.log("callback data is");
             console.log(data);
             //language=JQuery-CSS
             $("#output").html(JSON.stringify(data));
