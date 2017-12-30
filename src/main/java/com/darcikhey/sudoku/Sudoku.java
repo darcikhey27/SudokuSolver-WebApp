@@ -4,10 +4,7 @@ package com.darcikhey.sudoku;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import javax.json.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.StringReader;
@@ -41,14 +38,29 @@ public class Sudoku {
         this.grid = new Cell[9][9];
     }
 
+    @Override
+    public String toString() {
+        JsonObjectBuilder json = Json.createObjectBuilder();
+
+        //StringBuilder res = new StringBuilder();
+
+        for(int i = 0; i < 9; i++) {
+            JsonArrayBuilder itemArray = Json.createArrayBuilder();
+            for(int k = 0; k < 9; k++) {
+                itemArray.add(this.grid[i][k].value);
+            }
+            json.add(""+i, itemArray);
+        }
+        return json.toString();
+    }
     public String buildFromJsonString(String jsonString) {
         System.out.println("from repository " + jsonString);
 
-        buildGrid(jsonString);
+        String result = buildGrid(jsonString);
         return "{status : \"ok from repo\"}";
     }
 
-    private void buildGrid(String string) {
+    private String buildGrid(String string) {
         //Cell[][] grid = new Cell[9][9];
         //JsonObject jsonObject = getJsonObj(string);
 
@@ -56,6 +68,7 @@ public class Sudoku {
         JsonObject jsonObject = getJsonObj(string);
 
 
+        // build the grid from the json object
         for(int i = 0; i < 9; i++) {
             JsonArray array = jsonObject.getJsonArray("" + i);
             for(int k = 0; k < 9; k++) {
@@ -66,6 +79,11 @@ public class Sudoku {
             }
             // System.out.println();
         }
+        boolean wasSolved = this.solve(this.grid);
+        if(!wasSolved) {
+            return "{status: \"fail\"}";
+        }
+        return this.grid.toString();
     }
 
     private JsonObject getJsonObj(String s) {
