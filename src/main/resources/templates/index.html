@@ -10,9 +10,11 @@
 <!--navbar will be inserted here-->
 <div class="container-fluid" th:include="fragments/nav :: nav"></div>
 
-<div class="container">
+<div class="container-fluid">
+    <p>App will solve a suduko puzzle</p>
+    <p>I used Java with Spring Framework to build the web app!</p>
     <div class="row">
-        <div class="col-md-6 col-sm-12 col-lg-6">
+        <div class="col-md-6 col-sm-12 col-lg-6" id="left">
             <h3>test input</h3>
            <xmp>
 3 . 6 5 . 8 4 . .
@@ -30,13 +32,13 @@
             <p id="output"></p>
         </div>
 
-        <div class="col-md-6 col-sm-12 col-lg-6">
+        <div class="col-md-6 col-sm-12 col-lg-6" id="right">
             <section id="grid">
                 <table class="table">
                 </table>
 
                 <button class="btn btn-success btn-lg btn-block" id="solve">Solve</button>
-                <button class="btn btn-info btn-lg btn-block" id="clear-board">Clear Board</button>
+                <!--<button class="btn btn-info btn-lg btn-block" id="clear-board">Clear Board</button>-->
             </section>
         </div>
 

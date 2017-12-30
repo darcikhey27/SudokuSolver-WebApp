@@ -20,6 +20,9 @@ function solve() {
         jsonValues[x] = [];
         for (var y = 0; y < 9; y++) {
             var item = $("#cell" + x + "-" + y).val();
+            if(item == "") {
+                item = "0";
+            }
             jsonValues[x][y] = item;
         }
     }
@@ -29,12 +32,41 @@ function solve() {
         url: 'http://localhost:8080/solve',
         data: JSON.stringify(jsonValues),
         success: function (data) {
-            console.log("callback data is");
-            console.log(data);
+            //console.log("callback data is");
+            //console.log(data);
             //language=JQuery-CSS
             $("#output").html(JSON.stringify(data));
+            fillBoard(data);
         }
     });
+}
+
+// TODO::.. fill board wth json values
+function fillBoard(data) {
+
+
+    for (var x = 0; x < 9; x++) {
+        var array = data[x];
+        for (var y = 0; y < 9; y++) {
+            var cellHandle = $("#cell" + x + "-" + y);
+            var currentNum = cellHandle.val();
+            if(currentNum == "") {
+                var num = array[y];
+                cellHandle.val(num);
+                cellHandle.addClass("new-numbers");
+
+            }
+            //$("#cell" + x + "-" + y).val(num);
+        }
+    }
+
+
+
+    $("#generate-board").attr("disabled", "disabled");
+
+
+
+
 }
 
 function addValues() {
