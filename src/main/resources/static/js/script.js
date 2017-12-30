@@ -60,6 +60,9 @@ function fillBoard(data) {
             //$("#cell" + x + "-" + y).val(num);
         }
     }
+    var status = $("#status");
+    status.append("Done!");
+    status.addClass("done");
 
 }
 

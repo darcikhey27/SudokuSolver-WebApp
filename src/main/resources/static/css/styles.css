@@ -45,8 +45,10 @@ input {
 }
 h3 {
     color:#064873;
-
-
+}
+.done {
+    color: yellowgreen;
+    font-family: "Arial Black", "Source Sans Pro Black", sans-serif;
 }
 .buttons {
     margin: auto;
@@ -94,7 +96,12 @@ span {
     color: black;
 }
 
-
+#right {
+    text-align: left;
+}
+#left {
+    text-align: right;
+}
 
 
 .pound {
