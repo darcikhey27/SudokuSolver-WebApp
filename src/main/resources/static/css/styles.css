@@ -1,6 +1,7 @@
 body {
-    background-color: #e1e8f0;
-    color: black;
+    background-color: white;
+    color: #064873;
+    font-family: Consolas, sans-serif;
 }
 table {
     margin:1em auto;
@@ -35,51 +36,80 @@ input {
 }
 .btn-success {
     color: black;
-    background-color: #6ed3cf;
+    background-color: #049F34;
     font-family: Consolas, sans-serif;
 }
 .btn-success:hover {
-    background-color: #B8AE9C;
+    background-color: #0A8855;
     border-color:white;
 }
 h3 {
-    color: #e62739;
+    color:#064873;
+
+
 }
 .buttons {
     margin: auto;
     width: 25%;
 }
 #navbar {
-    background-color: lightgray;
+    background-color: #0A8855;
 }
 #navbar h1{
+    color: black;
     font-family: inherit;
     font-size: 2.0em;
 }
 xmp {
     font-family: Consolas, sans-serif;
     font-size: 1.2em;
-    color: darkgreen;
+    color: #067325;
 }
 .col-md-6 {
     text-align: center;
 }
 .new-numbers {
-    color: red;
-}
-#left {
-
-}
-#right {
-
+    color: #067325;
 }
 footer {
-    text-align: center;
-    padding-top: 10%;
+    font-size: 1.0em;
+    background-color: #0A8855;
+    text-align: left;
+    padding: 2%;
+
 }
-small {
-    color: #8A0917;
+footer>p, li {
+    color: black;
 }
-small>p {
-    color: #8A0917;
+a {
+    color: black;
+    font-size: 1.2em;
+    text-decoration: none;
 }
+span {
+    color: black;
+}
+
+
+
+
+.pound {
+    color: black;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+.blink {
+    animation: blink 1s step-start 0s infinite;
+    -webkit-animation: blink 1s step-start 0s infinite;
+}
+
+

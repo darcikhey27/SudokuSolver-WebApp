@@ -37,6 +37,7 @@ function solve() {
             //language=JQuery-CSS
             $("#output").html(JSON.stringify(data));
             fillBoard(data);
+            $("#solve").attr("disabled", "disabled");
         }
     });
 }
@@ -59,13 +60,6 @@ function fillBoard(data) {
             //$("#cell" + x + "-" + y).val(num);
         }
     }
-
-
-
-    $("#generate-board").attr("disabled", "disabled");
-
-
-
 
 }
 
