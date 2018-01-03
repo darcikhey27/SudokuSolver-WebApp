@@ -1,4 +1,4 @@
-# SudokuSolver-WebApp
+# Sudoko board solved using recursion and backtracking 
 * Spring Boot, MVC
 * Thymeleaf template engine
 * jQuery,html/css
