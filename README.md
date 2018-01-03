@@ -6,9 +6,10 @@
 
 Algorithm will solve a sudoku puzzle using Java in the backend with Spring boot framework
 
-a JSON object will be sent to the backend using AJAX (ex)
-a 0 represents an emtpy cell in the Sudoky board . 
+a JSON object will be sent to the backend using AJAX .  
+0 represents an emtpy cell in the Sudoky board . 
 
+### input
 ```JavaScript
 var testBoard = {
         0: [3, 0, 6, 5, 0, 8, 4, 0, 0],
@@ -30,6 +31,6 @@ $.ajax({
             // ..
         }
     });  
-``` . 
-
+```
+### output
 App will return another JSON object containing a solved Sudoku board
