@@ -30,4 +30,6 @@ $.ajax({
             // ..
         }
     });  
-```
+``` . 
+
+App will return another JSON object containing a solved Sudoku board
