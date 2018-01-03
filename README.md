@@ -6,6 +6,7 @@
 Algorithm will solve a sudoku puzzle using Java in the backend with Spring boot framework
 
 a JSON object will be sent to the backend using AJAX (ex)
+```JavaScript
 var testValues = {
         0: [3, 0, 6, 5, 0, 8, 4, 0, 0],
         1: [5, 2, 0, 0, 0, 0, 0, 0, 0],
@@ -26,4 +27,5 @@ $.ajax({
             // ..
         }
     });  
+    ```
     
