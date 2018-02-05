@@ -7,7 +7,7 @@
 Algorithm will solve a sudoku puzzle using Java in the backend with Spring boot framework
 
 a JSON object will be sent to the backend using AJAX .  
-0 represents an emtpy cell in the Sudoky board . 
+0 represents an emtpy cell in the Sudoku board . 
 
 ### input
 ```JavaScript
