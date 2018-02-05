@@ -47,4 +47,5 @@ App will return another JSON object containing a solved Sudoku board
 "8":[7,4,5,2,8,6,3,1,9]} . 
 ```
 
-
+## take it for a run . 
+http://sudoku.us-west-2.elasticbeanstalk.com/
